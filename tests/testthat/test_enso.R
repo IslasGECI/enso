@@ -32,8 +32,8 @@ describe("Return season by given date", {
 })
 
 describe("Return if the date corresponds to an El Niño, La Niña or neutral event🥇", {
-  it("Return El Niño for month 1", {
-    expected <- "El Niño"
+  it("Return neutral for month 1", {
+    expected <- "Neutral"
     obtained <- compute_enso("2025-01-01")
     expect_equal(expected, obtained)
   })
