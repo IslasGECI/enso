@@ -1,17 +1,9 @@
 compute_season <- function(date) {
-  mes<-substr(date,6,7)
-  seasons<-c(
-    "01"="Winter",
-    "02"="Winter", 
-    "03"="Winter",
-    "04"="Spring", 
-    "05"="Spring",
-    "06"="Spring",
-    "07"="Summer", 
-    "08"="Summer",
-    "09"="Summer",
-    "10"="Fall",
-    "11"="Fall",
-    "12"="Fall")
-  season<-seasons[[mes]]
+  mes <- substr(date, 6, 7)
+  dplyr::case_when(
+    mes %in% c("01", "02", "03") ~ "Winter",
+    mes %in% c("04", "05", "06") ~ "Spring",
+    mes %in% c("07", "08", "09") ~ "Summer",
+    mes %in% c("10", "11", "12") ~ "Fall"
+  )
 }
