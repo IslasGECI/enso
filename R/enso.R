@@ -15,11 +15,30 @@ lookup_season_column <- function(month) {
 }
 
 lookup_oni_values <- function(oni_data, year, season) {
+  n_seasons <- length(season_columns)
   season_index <- which(season_columns == season)
-  start_index <- season_index - 4
-  end_index <- season_index + 4
-  selected_seasons <- season_columns[seq(start_index, end_index)]
-  as.numeric(oni_data[oni_data$Year == year, selected_seasons])
+  half_window <- 4
+  start_index <- season_index - half_window
+  end_index <- season_index + half_window
+
+  prev_values <- NULL
+  if (start_index < 1) {
+    n_prev <- half_window - (season_index - 1)
+    prev_seasons <- season_columns[(n_seasons - n_prev + 1):n_seasons]
+    prev_values <- as.numeric(oni_data[oni_data$Year == year - 1, prev_seasons])
+    start_index <- 1
+  }
+
+  next_values <- NULL
+  if (end_index > n_seasons) {
+    n_next <- end_index - n_seasons
+    next_seasons <- season_columns[1:n_next]
+    next_values <- as.numeric(oni_data[oni_data$Year == year + 1, next_seasons])
+    end_index <- n_seasons
+  }
+
+  current_values <- as.numeric(oni_data[oni_data$Year == year, season_columns[start_index:end_index]])
+  c(prev_values, current_values, next_values)
 }
 
 lookup_oni_value <- function(oni_data, year, season_column) {
