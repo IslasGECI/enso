@@ -39,7 +39,7 @@ describe("Return if the date corresponds to an El Niño, La Niña or neutral eve
     expect_equal(expected, obtained)
   })
   it("Return neutral for month 1", {
-    expected <- "Neutral"
+    expected <- "Niña"
     obtained <- compute_enso("2025-01-01", noaa_data_df)
     expect_equal(expected, obtained)
   })

@@ -12,9 +12,7 @@ compute_enso <- function(date, oni_data) {
   date <- as.Date(date)
   year <- as.numeric(format(date, "%Y"))
   month <- as.numeric(format(date, "%m"))
-  trimestral_cols <- c("DJF", "JFM", "FMA", "MAM", "AMJ", "MJJ", "JJA", "JAS", "ASO", "SON", "OND", "NDJ")
-  central_month <- trimestral_cols[month]
   row <- oni_data[oni_data$Year == year, ]
-  value <- as.numeric(row[[central_month]])
-  if (value > 0.5) "Niño" else "Neutral"
+  value <- as.numeric(row[[month + 1]])
+  if (value > 0.5) "Niño" else "Niña"
 }
