@@ -7,3 +7,14 @@ compute_season <- function(date) {
     month %in% c("10", "11", "12") ~ "Fall"
   )
 }
+
+compute_enso <- function(date, oni_data) {
+  date <- as.Date(date)
+  year <- as.numeric(format(date, "%Y"))
+  month <- as.numeric(format(date, "%m"))
+  season_cols <- c("DJF", "JFM", "FMA", "MAM", "AMJ", "MJJ", "JJA", "JAS", "ASO", "SON", "OND", "NDJ")
+  season <- season_cols[month]
+  row <- oni_data[oni_data$Year == year, ]
+  value <- as.numeric(row[[season]])
+  if (value > 0.5) "Niño" else "Neutral"
+}
