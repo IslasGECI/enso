@@ -8,8 +8,18 @@ compute_season <- function(date) {
   )
 }
 
+season_columns <- c("DJF", "JFM", "FMA", "MAM", "AMJ", "MJJ", "JJA", "JAS", "ASO", "SON", "OND", "NDJ")
+
 lookup_season_column <- function(month) {
-  c("DJF", "JFM", "FMA", "MAM", "AMJ", "MJJ", "JJA", "JAS", "ASO", "SON", "OND", "NDJ")[month]
+  season_columns[month]
+}
+
+lookup_oni_values <- function(oni_data, year, season) {
+  season_index <- which(season_columns == season)
+  start_index <- season_index - 4
+  end_index <- season_index + 4
+  selected_seasons <- season_columns[seq(start_index, end_index)]
+  as.numeric(oni_data[oni_data$Year == year, selected_seasons])
 }
 
 lookup_oni_value <- function(oni_data, year, season_column) {
