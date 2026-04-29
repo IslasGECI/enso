@@ -33,14 +33,19 @@ describe("Return season by given date", {
 
 describe("Return if the date corresponds to an El Niño, La Niña or neutral event🥇", {
   noaa_data_df <- read_csv("/workdir/tests/data/roni_data.csv", show_col_types = FALSE)
-  it("Return neutral for month 1", {
+  it("Return niño for month 8", {
     expected <- "Niño"
     obtained <- compute_enso("2023-08-01", noaa_data_df)
     expect_equal(expected, obtained)
   })
-  it("Return neutral for month 1", {
+  it("Return niña for month 1", {
     expected <- "Niña"
     obtained <- compute_enso("2025-01-01", noaa_data_df)
+    expect_equal(expected, obtained)
+  })
+  it("Return Neutral", {
+    expected <- "Neutral"
+    obtained <- compute_enso("2024-04-01", noaa_data_df)
     expect_equal(expected, obtained)
   })
 })
