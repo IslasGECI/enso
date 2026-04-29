@@ -49,3 +49,13 @@ describe("Return if the date corresponds to an El Niño, La Niña or neutral eve
     expect_equal(expected, obtained)
   })
 })
+describe("Get index time series from NOAA data", {
+  noaa_data_df <- read_csv("/workdir/tests/data/roni_data.csv", show_col_types = FALSE)
+  it("Return correct ONI value for 2023-08-01", {
+    obtained <- lookup_oni_values(noaa_data_df, 2023, "JAS")
+    expected <- c(-0.2, 0.1, 0.4, 0.6, 0.9, 1.1, 1.4, 1.5, 1.5)
+    expect_equal(expected, obtained)
+    expected_length <- length(expected)
+    expect_equal(expected_length, length(obtained))
+  })
+})
