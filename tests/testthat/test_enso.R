@@ -57,3 +57,12 @@ describe("transform_roni_data_to_longer", {
     expect_equal(exptected_columns, colnames(transformed_df))
   })
 })
+describe("Get neccessary oni values to calculate oni phase", {
+  transformed_df <- read_csv("/workdir/tests/data/transformed_roni_data.csv", show_col_types = FALSE)
+  it("Lookup oni values from a given year and season", {
+    obtained <- lookup_oni_values(transformed_df, 2023, "JAS")
+    expected_length <- 9
+    obtained_length <- length(obtained)
+    expect_equal(expected_length, obtained_length)
+  })
+})
