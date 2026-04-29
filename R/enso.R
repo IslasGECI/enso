@@ -8,11 +8,29 @@ compute_season <- function(date) {
   )
 }
 
+lookup_season_column <- function(month) {
+  c("DJF", "JFM", "FMA", "MAM", "AMJ", "MJJ", "JJA", "JAS", "ASO", "SON", "OND", "NDJ")[month]
+}
+
+lookup_oni_value <- function(oni_data, year, season_column) {
+  oni_data[oni_data$Year == year, ][[season_column]]
+}
+
+classify_enso <- function(oni_value) {
+  if (oni_value > 0.5) {
+    "Niño"
+  } else if (oni_value < -0.5) {
+    "Niña"
+  } else {
+    "Neutral"
+  }
+}
+
 compute_enso <- function(date, oni_data) {
   date <- as.Date(date)
   year <- as.numeric(format(date, "%Y"))
   month <- as.numeric(format(date, "%m"))
-  row <- oni_data[oni_data$Year == year, ]
-  value <- as.numeric(row[[month + 1]])
-  if (value > 0.5) "Niño" else "Niña"
+  season_column <- lookup_season_column(month)
+  oni_value <- lookup_oni_value(oni_data, year, season_column)
+  classify_enso(oni_value)
 }
