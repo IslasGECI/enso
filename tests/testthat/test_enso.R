@@ -58,4 +58,9 @@ describe("Get index time series from NOAA data", {
     expected_length <- length(expected)
     expect_equal(expected_length, length(obtained))
   })
+  it("Return correct ONI values for edge cases", {
+    obtained <- lookup_oni_values(noaa_data_df, 2024, "DJF")
+    expected <- c(1.1, 1.4, 1.5, 1.5, 1.2, 0.9, 0.5, 0.1, -0.3)
+    expect_equal(expected, obtained)
+  })
 })
