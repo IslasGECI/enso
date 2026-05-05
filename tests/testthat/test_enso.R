@@ -32,7 +32,7 @@ describe("Return season by given date", {
 })
 
 describe("Return if the date corresponds to an El Niño, La Niña or neutral event🥇", {
-  noaa_data_df <- read_csv("/workdir/tests/data/roni_data.csv", show_col_types = FALSE)
+  noaa_data_df <- readr::read_csv("/workdir/tests/data/roni_data.csv", show_col_types = FALSE)
   it("Return niño for month 8", {
     expected <- "Niño"
     obtained <- compute_enso("2023-08-01", noaa_data_df)
@@ -51,17 +51,17 @@ describe("Return if the date corresponds to an El Niño, La Niña or neutral eve
 })
 describe("transform_roni_data_to_longer", {
   it("Return a data frame with the correct structure", {
-    noaa_data_df <- read_csv("/workdir/tests/data/roni_data.csv", show_col_types = FALSE)
+    noaa_data_df <- readr::read_csv("/workdir/tests/data/roni_data.csv", show_col_types = FALSE)
     transformed_df <- transform_roni_data_to_longer(noaa_data_df)
     exptected_columns <- c("Year", "months", "values")
     expect_equal(exptected_columns, colnames(transformed_df))
   })
 })
 describe("Get neccessary oni values to calculate oni phase", {
-  transformed_df <- read_csv("/workdir/tests/data/transformed_roni_data.csv", show_col_types = FALSE)
+  noaa_data_df <- readr::read_csv("/workdir/tests/data/roni_data.csv", show_col_types = FALSE)
   it("Lookup oni values from a given year and season", {
-    obtained <- lookup_oni_values(transformed_df, 2023, "JAS")
-    expected_length <- 9
+    obtained <- lookup_oni_value(noaa_data_df, 2023, "JAS")
+    expected_length <- 1
     obtained_length <- length(obtained)
     expect_equal(expected_length, obtained_length)
   })
