@@ -15,8 +15,8 @@ lookup_season_column <- function(month) {
 }
 
 
-lookup_oni_value <- function(oni_data, year, season_column) {
-  oni_data[oni_data$Year == year, ][[season_column]]
+lookup_oni_value <- function(oni_data, year, trimester) {
+  oni_data[oni_data$Year == year, ][[trimester]]
 }
 
 lookup_nine_oni_values <- function(oni_data, year, trimester) {
@@ -46,7 +46,7 @@ compute_enso <- function(date, oni_data) {
   date <- as.Date(date)
   year <- as.numeric(format(date, "%Y"))
   month <- as.numeric(format(date, "%m"))
-  season_column <- lookup_season_column(month)
-  oni_value <- lookup_oni_value(oni_data, year, season_column)
+  trimester <- lookup_season_column(month)
+  oni_value <- lookup_oni_value(oni_data, year, trimester)
   classify_enso(oni_value)
 }
