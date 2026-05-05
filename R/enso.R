@@ -19,6 +19,10 @@ lookup_oni_value <- function(oni_data, year, season_column) {
   oni_data[oni_data$Year == year, ][[season_column]]
 }
 
+lookup_nine_oni_values <- function(oni_data, year, trimester) {
+  rep(0, 9)
+}
+
 classify_enso <- function(oni_value) {
   if (oni_value > 0.5) {
     "Niño"
