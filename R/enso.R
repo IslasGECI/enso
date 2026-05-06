@@ -36,17 +36,16 @@ classify_enso <- function(oni_value) {
 
 classify_enso_phase <- function(oni_values) {
   runs_niña <- rle(oni_values <= -0.5)
-  consecutive_threshold <- 5
-  if (any(runs_niña$lengths[runs_niña$values] >= consecutive_threshold)) {
+  if (has_consecutive_threshold_values(runs_niña)) {
     return("Niña")
   }
   runs_niño <- rle(oni_values >= 0.5)
-  if (any(runs_niño$lengths[runs_niño$values] >= consecutive_threshold)) {
+  if (has_consecutive_threshold_values(runs_niño)) {
     return("Niño")
   }
   "Neutral"
 }
-has_consecutive_threshold_values <- function(runs, threshold) {
+has_consecutive_threshold_values <- function(runs) {
   consecutive_threshold <- 5
   any(runs$lengths[runs$values] >= consecutive_threshold)
 }
