@@ -8,9 +8,8 @@ compute_season <- function(date) {
   )
 }
 
-trimester <- c("DJF", "JFM", "FMA", "MAM", "AMJ", "MJJ", "JJA", "JAS", "ASO", "SON", "OND", "NDJ")
-
 lookup_season_column <- function(month) {
+  trimester <- c("DJF", "JFM", "FMA", "MAM", "AMJ", "MJJ", "JJA", "JAS", "ASO", "SON", "OND", "NDJ")
   trimester[month]
 }
 
