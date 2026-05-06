@@ -34,7 +34,7 @@ classify_enso <- function(oni_value) {
   }
 }
 
-xxclassiy_enso <- function(oni_values) {
+classify_enso_phase <- function(oni_values) {
   runs_niña <- rle(oni_values <= -0.5)
   if (any(runs_niña$lengths[runs_niña$values] >= 5)) {
     return("Niña")
