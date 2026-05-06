@@ -67,9 +67,15 @@ describe("Get neccessary oni values to calculate oni phase", {
   })
   transformed_df <- readr::read_csv("/workdir/tests/data/transformed_roni_data.csv", show_col_types = FALSE)
   it("Lookup nine oni values from a given year and season", {
-    obtained <- lookup_nine_oni_values(noaa_data_df, 2023, "JAS")
+    obtained <- lookup_nine_oni_values(transformed_df, 2023, "JAS")
     expected_length <- 9
     obtained_length <- length(obtained)
     expect_equal(expected_length, obtained_length)
+  })
+  it("Return 4 consecutive values after and before from a given year and season", {
+    obtained <- lookup_nine_oni_values(transformed_df, 2024, "JJA")
+    expected_values <- c(0.5, 0.1, -0.3, -0.5, -0.5, -0.6, -0.8, -0.8, -0.9)
+    obtained_values <- obtained$values
+    expect_equal(expected_values, obtained_values)
   })
 })
