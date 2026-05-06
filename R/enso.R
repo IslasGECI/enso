@@ -20,7 +20,8 @@ lookup_oni_value <- function(oni_data, year, trimester) {
 }
 
 lookup_nine_oni_values <- function(oni_data, year, trimester) {
-  rep(0, 9)
+  row_index <- which(oni_data$Year == year & oni_data$months == trimester)
+  oni_data[(row_index - 4):(row_index + 4), ]$values
 }
 
 classify_enso <- function(oni_value) {
