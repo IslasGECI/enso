@@ -36,11 +36,12 @@ classify_enso <- function(oni_value) {
 
 classify_enso_phase <- function(oni_values) {
   runs_niña <- rle(oni_values <= -0.5)
-  if (any(runs_niña$lengths[runs_niña$values] >= 5)) {
+  consecutive_threshold <- 5
+  if (any(runs_niña$lengths[runs_niña$values] >= consecutive_threshold)) {
     return("Niña")
   }
   runs_niño <- rle(oni_values >= 0.5)
-  if (any(runs_niño$lengths[runs_niño$values] >= 5)) {
+  if (any(runs_niño$lengths[runs_niño$values] >= consecutive_threshold)) {
     return("Niño")
   }
   "Neutral"
