@@ -75,7 +75,7 @@ describe("Get neccessary oni values to calculate oni phase", {
   it("Return 4 consecutive values after and before from a given year and season", {
     obtained <- lookup_nine_oni_values(transformed_df, 2024, "JJA")
     expected_values <- c(0.5, 0.1, -0.3, -0.5, -0.5, -0.6, -0.8, -0.8, -0.9)
-    obtained_values <- obtained$values
+    obtained_values <- obtained
     expect_equal(expected_values, obtained_values)
   })
 })
