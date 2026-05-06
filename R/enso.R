@@ -34,6 +34,10 @@ classify_enso <- function(oni_value) {
   }
 }
 
+xxclassiy_enso <- function(oni_values) {
+  if (sum(oni_values <= -0.5) >= 5) "Niña" else "Neutral"
+}
+
 transform_roni_data_to_longer <- function(roni_data) {
   roni_data |>
     tidyr::pivot_longer(
