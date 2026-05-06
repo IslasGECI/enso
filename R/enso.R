@@ -46,6 +46,11 @@ classify_enso_phase <- function(oni_values) {
   }
   "Neutral"
 }
+has_consecutive_threshold_values <- function(oni_values, threshold) {
+  consecutive_threshold <- 5
+  runs_niño <- rle(oni_values >= threshold)
+  any(runs_niño$lengths[runs_niño$values] >= consecutive_threshold)
+}
 
 transform_roni_data_to_longer <- function(roni_data) {
   roni_data |>
