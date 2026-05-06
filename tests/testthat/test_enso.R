@@ -85,4 +85,10 @@ describe("Classify enso phase given 9 oni values", {
     expected <- "Niña"
     expect_equal(obtained, expected)
   })
+  neutral_values <- c(0.2, 0.1, 0.1, -0.2, 0.3, -0.6, -0.8, -0.8, -0.9)
+  it("classify as neutral", {
+    obtained <- xxclassiy_enso(neutral_values)
+    expected <- "Neutral"
+    expect_equal(obtained, expected)
+  })
 })
