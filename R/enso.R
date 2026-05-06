@@ -35,16 +35,15 @@ classify_enso <- function(oni_value) {
 }
 
 classify_enso_phase <- function(oni_values) {
-  runs_niña <- rle(oni_values <= -0.5)
-  if (has_consecutive_threshold_values(runs_niña)) {
-    return("Niña")
-  }
-  runs_niño <- rle(oni_values >= 0.5)
-  if (has_consecutive_threshold_values(runs_niño)) {
-    return("Niño")
+  phase_conditions <- list("Niña" = rle(oni_values <= -0.5), "Niño" = rle(oni_values >= 0.5))
+  for (phase in names(phase_conditions)) {
+    if (has_consecutive_threshold_values(phase_conditions[[phase]])) {
+      return(phase)
+    }
   }
   "Neutral"
 }
+
 has_consecutive_threshold_values <- function(runs) {
   consecutive_threshold <- 5
   any(runs$lengths[runs$values] >= consecutive_threshold)
