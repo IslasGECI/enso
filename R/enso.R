@@ -14,24 +14,9 @@ lookup_season_column <- function(month) {
   trimester[month]
 }
 
-
-lookup_oni_value <- function(oni_data, year, trimester) {
-  oni_data[oni_data$Year == year, ][[trimester]]
-}
-
 lookup_nine_oni_values <- function(oni_data, year, trimester) {
   row_index <- which(oni_data$Year == year & oni_data$months == trimester)
   oni_data[(row_index - 4):(row_index + 4), ]$values
-}
-
-classify_enso <- function(oni_value) {
-  if (oni_value > 0.5) {
-    "Niño"
-  } else if (oni_value < -0.5) {
-    "Niña"
-  } else {
-    "Neutral"
-  }
 }
 
 classify_enso_phase <- function(oni_values) {

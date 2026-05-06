@@ -58,13 +58,6 @@ describe("transform_roni_data_to_longer", {
   })
 })
 describe("Get neccessary oni values to calculate oni phase", {
-  noaa_data_df <- readr::read_csv("/workdir/tests/data/roni_data.csv", show_col_types = FALSE)
-  it("Lookup a single oni value from a given year and season", {
-    obtained <- lookup_oni_value(noaa_data_df, 2023, "JAS")
-    expected_length <- 1
-    obtained_length <- length(obtained)
-    expect_equal(expected_length, obtained_length)
-  })
   transformed_df <- readr::read_csv("/workdir/tests/data/transformed_roni_data.csv", show_col_types = FALSE)
   it("Lookup nine oni values from a given year and season", {
     obtained <- lookup_nine_oni_values(transformed_df, 2023, "JAS")
