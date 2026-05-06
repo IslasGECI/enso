@@ -63,6 +63,7 @@ compute_enso <- function(date, oni_data) {
   year <- as.numeric(format(date, "%Y"))
   month <- as.numeric(format(date, "%m"))
   trimester <- lookup_season_column(month)
-  oni_value <- lookup_oni_value(oni_data, year, trimester)
-  classify_enso(oni_value)
+  transformed_oni_data <- transform_roni_data_to_longer(oni_data)
+  oni_value <- lookup_nine_oni_values(transformed_oni_data, year, trimester)
+  classify_enso_phase(oni_value)
 }
