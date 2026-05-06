@@ -79,8 +79,8 @@ describe("Get neccessary oni values to calculate oni phase", {
   })
 })
 describe("Classify enso phase given 9 oni values", {
-  niña_values <- c(0.5, 0.1, -0.3, -0.5, -0.5, -0.6, -0.8, -0.8, -0.9)
   it("classify as niña", {
+    niña_values <- c(0.5, 0.1, -0.3, -0.5, -0.5, -0.6, -0.8, -0.8, -0.9)
     obtained <- xxclassiy_enso(niña_values)
     expected <- "Niña"
     expect_equal(obtained, expected)
@@ -89,6 +89,9 @@ describe("Classify enso phase given 9 oni values", {
   it("classify as neutral", {
     obtained <- xxclassiy_enso(neutral_values)
     expected <- "Neutral"
+    expect_equal(obtained, expected)
+    no_niña_values <- c(0.5, 0.1, -0.5, -0.3, -0.5, -0.6, -0.8, -0.8, -0.3)
+    obtained <- xxclassiy_enso(no_niña_values)
     expect_equal(obtained, expected)
   })
 })
