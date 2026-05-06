@@ -94,4 +94,10 @@ describe("Classify enso phase given 9 oni values", {
     obtained <- xxclassiy_enso(no_niña_values)
     expect_equal(obtained, expected)
   })
+  it("classify as niño", {
+    niño_values <- c(0.4, 0.7, 1, 1, 1.1, 1.2, 1.3, 1.1, 0.7)
+    obtained <- xxclassiy_enso(niño_values)
+    expected <- "Niño"
+    expect_equal(obtained, expected)
+  })
 })
