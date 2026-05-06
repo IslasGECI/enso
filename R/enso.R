@@ -35,9 +35,15 @@ classify_enso <- function(oni_value) {
 }
 
 xxclassiy_enso <- function(oni_values) {
-  runs <- rle(oni_values <= -0.5)
-  print(runs)
-  if (any(runs$lengths[runs$values] >= 5)) "Niña" else "Neutral"
+  runs_niña <- rle(oni_values <= -0.5)
+  if (any(runs_niña$lengths[runs_niña$values] >= 5)) {
+    return("Niña")
+  }
+  runs_niño <- rle(oni_values >= 0.5)
+  if (any(runs_niño$lengths[runs_niño$values] >= 5)) {
+    return("Niño")
+  }
+  "Neutral"
 }
 
 transform_roni_data_to_longer <- function(roni_data) {
