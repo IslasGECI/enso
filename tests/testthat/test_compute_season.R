@@ -24,7 +24,7 @@ describe("Return season by given date", {
     obtained <- compute_season("2026-02-01")
     expect_equal(expected, obtained)
   })
-  it("Return winter for month 2", {
+  it("Return summer for month 9", {
     expected <- "Summer"
     obtained <- compute_season("2026-09-01")
     expect_equal(expected, obtained)
