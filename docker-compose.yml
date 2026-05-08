@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: islasgeci/templater:latest
+    image: islasgeci/enso:latest
     command: bash
     volumes:
       - $PWD:/workdir
