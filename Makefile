@@ -71,7 +71,8 @@ setup: clean install
 install:
 	R -e "devtools::install()" && \
 	R -e "devtools::check(error_on = 'error')" && \
-	R -e "devtools::build()"
+	R -e "devtools::build()" && \
+	R -e "devtools::document()"
 
 tests:
 	Rscript -e "devtools::test(stop_on_failure = TRUE)"
