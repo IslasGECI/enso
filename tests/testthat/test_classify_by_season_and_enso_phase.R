@@ -10,6 +10,6 @@ describe("Classify by season and enso phase", {
     obtained_seasons <- obtained$Season
     expected_seasons <- c("Summer", "Winter", "Spring")
     expect_equal(obtained_seasons, expected_seasons)
-    expect_equal(obtained$ENSO_Phase, c("Niño", "Niña", "Neutral"))
+    expect_equal(obtained$ENSO_Phase, list("Niño", "Niña", "Neutral"))
   })
 })
