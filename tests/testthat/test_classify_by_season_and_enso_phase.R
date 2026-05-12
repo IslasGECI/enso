@@ -1,6 +1,6 @@
 describe("Classify by season and enso phase", {
   data_with_date <- tibble::tibble(
-    Date = c("2023-08-20", "2025-01-11", "2024-04-18")
+    Date = c("2023-08", "2025-01", "2024-04")
   )
   it("Return the season and enso phase for each date", {
     noaa_data_df <- readr::read_csv("/workdir/tests/data/roni_data.csv", show_col_types = FALSE)
