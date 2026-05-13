@@ -32,6 +32,7 @@ The project uses a strict red/green/refactor cycle via `make`. Each phase applie
 - **Internal functions** in `R/`: `compute_season()`, `compute_enso()`, `lookup_season_column()`, `transform_roni_data_to_longer()`, `lookup_nine_oni_values()`, `classify_enso_phase()`, `has_consecutive_threshold_values()`.
 - **`src/borrador_codigo_enso.R`** is scratch/draft code, **not** part of the package — do not edit or export.
 - **Sibling reference:** `../bycatch_code/` establishes patterns this project follows (e.g., `get_domain_specific_options` using `gecioptparse`). Consult it for implementation conventions.
+- **gecioptparse API:** Exported functions `character_option()`, `integer_option()`, `double_option()`, and `get_options_from_vec()` are used to build CLI options. Pattern: define each option with `gecioptparse::*_option()`, combine into a vector, pass to `gecioptparse::get_options_from_vec()`.
 - **The Gold:** Defined in `TODO.md`. Currently: migrate `get_domain_specific_options()` to use `gecioptparse`.
 - Only branch is `develop` (no `main`).
 
@@ -43,7 +44,7 @@ The project uses a strict red/green/refactor cycle via `make`. Each phase applie
 
 ## Dependencies & toolchain quirks
 
-- Remote dependency: `IslasGECI/testtools` (installed via `remotes` in `DESCRIPTION`).
+- Remote dependencies: `IslasGECI/gecioptparse`, `IslasGECI/testtools` (installed via `remotes` in `DESCRIPTION`).
 - `NAMESPACE` is **generated** by roxygen2 — never edit by hand. Regen with `devtools::document()` (part of `make setup`).
 - `man/` directory is generated the same way.
 - Coverage uses `covr` package + Codecov (token in `tests/testthat/coverage.R`).
