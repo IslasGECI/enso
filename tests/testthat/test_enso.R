@@ -17,3 +17,8 @@ test_that("lookup_nine_oni_values returns a numeric vector of length 9", {
   expect_type(actual, "double")
   expect_length(actual, 9)
 })
+
+test_that("classify_enso_phase returns Niño when 5+ consecutive values are >= 0.5", {
+  actual <- classify_enso_phase(c(0.4, 0.7, 1, 1, 1.1, 1.2, 1.3, 1.1, 0.7))
+  expect_equal(actual, "Niño")
+})
