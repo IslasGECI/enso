@@ -27,3 +27,9 @@ test_that("classify_enso_phase returns Niña when 5+ consecutive values are <= -
   actual <- classify_enso_phase(c(0.5, 0.1, -0.3, -0.5, -0.5, -0.6, -0.8, -0.8, -0.9))
   expect_equal(actual, "Niña")
 })
+
+test_that("compute_enso returns Niño for August 2023", {
+  noaa_data <- readr::read_csv("/workdir/tests/data/roni_data.csv", show_col_types = FALSE)
+  actual <- compute_enso("2023-08", noaa_data)
+  expect_equal(actual, "Niño")
+})
