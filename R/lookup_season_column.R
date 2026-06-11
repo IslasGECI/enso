@@ -3,6 +3,6 @@
 #' @param month An integer month (1-12)
 #' @return The season column name (e.g., "DJF")
 lookup_season_column <- function(month) {
-  seasons <- c("DJF", "JFM", "FMA", "MAM", "AMJ", "MJJ", "JJA", "JAS", "ASO", "SON", "OND", "NDJ")
-  seasons[month]
+  season_columns <- c("DJF", "JFM", "FMA", "MAM", "AMJ", "MJJ", "JJA", "JAS", "ASO", "SON", "OND", "NDJ")
+  season_columns[month]
 }
