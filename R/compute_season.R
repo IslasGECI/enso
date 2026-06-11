@@ -4,5 +4,5 @@
 #' @return The season name
 compute_season <- function(date) {
   month_str <- substr(date, 6, 7)
-  if (month_str == "04") "Spring" else "Winter"
+  if (month_str == "04") "Spring" else if (month_str == "07") "Summer" else "Winter"
 }
