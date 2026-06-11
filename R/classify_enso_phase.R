@@ -30,4 +30,5 @@ classify_enso_phase <- function(oni_values) {
   if (has_consecutive_threshold_values(oni_values, la_nina_threshold, "<=", consecutive_months_required)) {
     return("Niña")
   }
+  return("Neutral")
 }
