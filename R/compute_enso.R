@@ -4,7 +4,7 @@
 #' @param noaa_data Wide-format ONI data with Year column and trimester columns
 #' @return "Niño", "Niña", or "Neutral"
 compute_enso <- function(date, noaa_data) {
-  year <- as.integer(substr(date, 1, 4))
+  year <- extract_year(date)
   month <- extract_month(date)
   trimester <- lookup_season_column(month)
   oni_data <- transform_roni_data_to_longer(noaa_data)
