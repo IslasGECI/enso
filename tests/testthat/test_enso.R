@@ -22,3 +22,8 @@ test_that("classify_enso_phase returns Niño when 5+ consecutive values are >= 0
   actual <- classify_enso_phase(c(0.4, 0.7, 1, 1, 1.1, 1.2, 1.3, 1.1, 0.7))
   expect_equal(actual, "Niño")
 })
+
+test_that("classify_enso_phase returns Niña when 5+ consecutive values are <= -0.5", {
+  actual <- classify_enso_phase(c(0.5, 0.1, -0.3, -0.5, -0.5, -0.6, -0.8, -0.8, -0.9))
+  expect_equal(actual, "Niña")
+})
