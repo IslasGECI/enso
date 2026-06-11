@@ -3,12 +3,12 @@
 #' @param values A numeric vector
 #' @param threshold The threshold value
 #' @param comparison Either ">=" or "<="
-#' @param n The minimum number of consecutive values required
-#' @return TRUE if there are n or more consecutive values meeting the condition
-has_consecutive_threshold_values <- function(values, threshold, comparison, n) {
+#' @param min_consecutive The minimum number of consecutive values required
+#' @return TRUE if there are `min_consecutive` or more consecutive values meeting the condition
+has_consecutive_threshold_values <- function(values, threshold, comparison, min_consecutive) {
   hits_threshold <- if (comparison == ">=") values >= threshold else values <= threshold
   runs <- rle(hits_threshold)
-  any(runs$lengths[runs$values] >= n)
+  any(runs$lengths[runs$values] >= min_consecutive)
 }
 
 #' Classify ENSO phase based on ONI values
