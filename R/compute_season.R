@@ -1,4 +1,4 @@
-SEASONS <- c(
+MONTH_TO_SEASON <- c(
   "Winter", "Winter", "Winter",
   "Spring", "Spring", "Spring",
   "Summer", "Summer", "Summer",
@@ -11,5 +11,5 @@ SEASONS <- c(
 #' @return The season name
 compute_season <- function(date) {
   month <- extract_month(date)
-  SEASONS[month]
+  MONTH_TO_SEASON[month]
 }
