@@ -5,6 +5,7 @@
 #' @param trimester The target trimester abbreviation
 #' @return A numeric vector of nine ONI values
 lookup_nine_oni_values <- function(oni_data, year, trimester) {
+  half_window <- 4
   target_index <- which(oni_data$Year == year & oni_data$months == trimester)
-  oni_data$values[(target_index - 4):(target_index + 4)]
+  oni_data$values[(target_index - half_window):(target_index + half_window)]
 }
