@@ -5,8 +5,8 @@
 #' @return A data frame with columns Date, Season, ENSO_Phase
 classify_by_season_and_enso_phase <- function(data_with_date, noaa_data) {
   dates <- data_with_date$Date
-  seasons <- sapply(dates, compute_season)
-  phases <- sapply(dates, compute_enso, noaa_data)
+  seasons <- vapply(dates, compute_season, character(1))
+  phases <- vapply(dates, compute_enso, character(1), noaa_data)
   data.frame(
     Date = dates,
     Season = seasons,
