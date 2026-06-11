@@ -4,3 +4,8 @@ test_that("transform_roni_data_to_longer returns a data frame with columns Year,
   expect_s3_class(long_oni, "data.frame")
   expect_named(long_oni, c("Year", "months", "values"))
 })
+
+test_that("lookup_season_column maps month 1 to DJF", {
+  actual <- lookup_season_column(1)
+  expect_equal(actual, "DJF")
+})
