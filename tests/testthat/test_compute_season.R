@@ -7,3 +7,8 @@ test_that("compute_season returns Spring for April dates", {
   actual <- compute_season("2026-04-01")
   expect_equal(actual, "Spring")
 })
+
+test_that("compute_season returns Summer for July dates", {
+  actual <- compute_season("2026-07-01")
+  expect_equal(actual, "Summer")
+})
