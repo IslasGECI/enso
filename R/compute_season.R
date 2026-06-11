@@ -1,8 +1,8 @@
 MONTH_TO_SEASON <- c(
-  "Winter", "Winter", "Winter",
-  "Spring", "Spring", "Spring",
-  "Summer", "Summer", "Summer",
-  "Fall", "Fall", "Fall"
+  rep("Winter", 3),
+  rep("Spring", 3),
+  rep("Summer", 3),
+  rep("Fall", 3)
 )
 
 #' Compute season for a given date
