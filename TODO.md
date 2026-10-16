@@ -16,7 +16,7 @@
 ### DESCRIPTION changes
 
 - Add `gecioptparse` to `Imports:` (alphabetical order).
-- Add `IslasGECI/gecioptparse` to `Remotes:` (follows `bycatch_code` pattern).
+- Add `IslasGECI/gecioptparse` to `Remotes:` (follows `bycatch` pattern).
 
 ## TDD plan
 

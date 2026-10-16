@@ -31,7 +31,7 @@ The project uses a strict red/green/refactor cycle via `make`. Each phase applie
   - `get_domain_specific_options()` — define CLI option keys with defaults.
 - **Internal functions** in `R/`: `compute_season()`, `compute_enso()`, `lookup_season_column()`, `transform_roni_data_to_longer()`, `lookup_nine_oni_values()`, `classify_enso_phase()`, `has_consecutive_threshold_values()`.
 - **`src/borrador_codigo_enso.R`** is scratch/draft code, **not** part of the package — do not edit or export.
-- **Sibling reference:** `../bycatch_code/` establishes patterns this project follows (e.g., `get_domain_specific_options` using `gecioptparse`). Consult it for implementation conventions.
+- **Sibling reference:** `../bycatch/` establishes patterns this project follows (e.g., `get_domain_specific_options` using `gecioptparse`). Consult it for implementation conventions.
 - **gecioptparse API:** Exported functions `character_option()`, `integer_option()`, `double_option()`, and `get_options_from_vec()` are used to build CLI options. Pattern: define each option with `gecioptparse::*_option()`, combine into a vector, pass to `gecioptparse::get_options_from_vec()`.
 - **The Gold:** Defined in `TODO.md`. Currently: migrate `get_domain_specific_options()` to use `gecioptparse`.
 - Only branch is `develop` (no `main`).
