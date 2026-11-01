@@ -46,7 +46,7 @@ The project uses a strict red/green/refactor cycle via `make`. Each phase applie
 - **testthat edition 3**, BDD-style with `describe()`/`it()`.
 - `tests/testthat/test_acceptance_*.R` hold the acceptance tests and start with `library(enso)`, so they reach only the public interface. `make verify` runs them through qed; `make tests` also picks them up.
 - Unit tests cover the internals.
-- Test fixtures live in `tests/data/` (`roni_data.csv`, `transformed_roni_data.csv`).
+- Test fixtures live in `tests/data/` (`roni_data.csv`).
 - Tests read CSVs with `readr::read_csv("/workdir/tests/data/...")` — path is hardcoded for the Docker container.
 
 ## Dependencies & toolchain quirks

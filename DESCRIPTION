@@ -10,8 +10,6 @@ Config/testthat/edition: 3
 Description: This package contains functions to predict ENSO consecuences.
 Encoding: UTF-8
 Imports:
-    comprehenr,
-    R6,
     tidyverse
 LazyData: true
 License: AGPL-3.0-or-later
