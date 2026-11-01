@@ -1,0 +1,23 @@
+#:schema https://raw.githubusercontent.com/tskovlund/qed/main/docs/spec.schema.json
+
+name = "meteorological_season_and_enso_phase"
+
+[[criteria]]
+description = """
+A tibble of dates comes back with its own columns untouched and two labels appended: Meteorological_Season and ENSO_Phase.
+For the dates 2023-08, 2025-01, and 2024-04 with a station column, the labels are Summer/Niño, Winter/Niña, and Spring/Neutral, and station is still there.
+"""
+
+[criteria.verify]
+type = "command"
+run = "Rscript -e \"testthat::test_file('tests/testthat/test_acceptance_meteorological_season_and_enso_phase.R', stop_on_failure = TRUE)\""
+
+[[criteria]]
+description = """
+The caller names the column that holds the dates, and a name that is not there is an error.
+A table whose date column is called Fecha is labelled the same way, and asking for a column that does not exist fails instead of returning an empty table.
+"""
+
+[criteria.verify]
+type = "command"
+run = "Rscript -e \"testthat::test_file('tests/testthat/test_acceptance_meteorological_season_and_enso_phase.R', stop_on_failure = TRUE)\""

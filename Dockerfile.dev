@@ -1,0 +1,7 @@
+FROM islasgeci/enso:latest
+
+RUN apt update && apt install --yes curl git
+RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh --silent --show-error --fail --output /tmp/elan-init.sh && sh /tmp/elan-init.sh -y
+RUN . "$HOME/.elan/env" && git clone https://github.com/tskovlund/qed.git /opt/qed
+RUN . "$HOME/.elan/env" && cd /opt/qed && lake build
+RUN ln --symbolic --force /opt/qed/.lake/build/bin/qed /usr/local/bin/qed

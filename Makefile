@@ -11,7 +11,8 @@ all: check coverage
     red \
     refactor \
     setup \
-    tests
+    tests \
+    verify
 
 check:
 	R -e "library(styler)" \
@@ -76,3 +77,7 @@ install:
 
 tests:
 	Rscript -e "devtools::test(stop_on_failure = TRUE)"
+
+verify:
+	R -e "devtools::install()"
+	qed verify specs

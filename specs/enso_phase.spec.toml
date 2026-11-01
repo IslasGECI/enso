@@ -1,0 +1,14 @@
+#:schema https://raw.githubusercontent.com/tskovlund/qed/main/docs/spec.schema.json
+
+name = "enso_phase"
+
+[[criteria]]
+description = """
+A date is labelled by the ENSO phase of its nine-trimester window.
+Against the NOAA ONI data in tests/data/roni_data.csv, 2023-08 is Niño, 2025-01 is Niña, and 2024-04 is Neutral.
+A phase needs five consecutive trimesters at or beyond 0.5 in absolute value, so a window whose cold excursion lasts four trimesters, or whose cold values are interrupted, stays Neutral.
+"""
+
+[criteria.verify]
+type = "command"
+run = "Rscript -e \"testthat::test_file('tests/testthat/test_acceptance_enso_phase.R', stop_on_failure = TRUE)\""

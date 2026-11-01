@@ -1,86 +1,48 @@
 # DOCS.md — enso
 
-Technical reference for all exported and internal functions.
+Public interface of the `enso` package. Every function below is exported and reachable after `library(enso)`.
 
 ---
 
-## Exported Functions
+### compute_meteorological_season(date)
 
-### `classify_by_season_and_enso_phase(data_with_date, nooa_data)`
+Labels a date by its meteorological season.
 
-Classifies each date in a data frame by season and ENSO phase using NOAA ONI data.
+**Parameters**:
+- `date`: character. One date in `YYYY-MM` or `YYYY-MM-DD` format.
 
-- **Parameters**:
-  - `data_with_date`: data.frame. Must contain a `Date` column with date strings.
-  - `nooa_data`: data.frame. NOAA ONI data in wide format with a `Year` column and twelve trimester columns (DJF, JFM, FMA, MAM, AMJ, MJJ, JJA, JAS, ASO, SON, OND, NDJ).
-- **Returns**: data.frame. The input data frame with two additional columns: `Season` (Winter, Spring, Summer, Fall) and `ENSO_Phase` (Niño, Niña, Neutral).
+**Returns**: character. One of `Winter`, `Spring`, `Summer`, or `Fall`.
 
-### `get_domain_specific_options()`
+**Notes**:
+- The seasons are meteorological: January to March is Winter, April to June is Spring, July to September is Summer, October to December is Fall.
+- A date that cannot be parsed yields `NA`.
+- The contract is one date. Passing a vector is unspecified.
 
-Defines CLI option keys with default values for domain-specific workflows.
+### compute_enso_phase(date, oni_data)
 
-- **Parameters**: None.
-- **Returns**: A named vector containing the option keys `data-path`, `roni-path`, and `output-path`.
+Labels a date by its ENSO phase.
 
----
+**Parameters**:
+- `date`: character. One date in `YYYY-MM` or `YYYY-MM-DD` format.
+- `oni_data`: data.frame. NOAA ONI data in wide format: a `Year` column and twelve trimester columns, from `DJF` to `NDJ`.
 
-## Internal Functions
+**Returns**: character. One of `Niño`, `Niña`, or `Neutral`.
 
-### `compute_season(date)`
+**Notes**:
+- The phase comes from the nine trimesters centered on the date: five consecutive trimesters at or above 0.5 are Niño, five at or below −0.5 are Niña, and anything else is Neutral.
 
-Maps a date string to a season name.
+### compute_meteorological_season_and_enso_phase(data_with_date, date_column_name, oni_data)
 
-- **Parameters**:
-  - `date`: character. Date string in YYYY-MM-DD format.
-- **Returns**: character. One of Winter, Spring, Summer, or Fall.
+Appends the meteorological season and the ENSO phase to a tibble of dates.
 
-### `compute_enso(date, oni_data)`
+**Parameters**:
+- `data_with_date`: data.frame. The table to label.
+- `date_column_name`: character. Name of the column that holds the dates.
+- `oni_data`: data.frame. NOAA ONI data in wide format.
 
-Classifies the ENSO phase for a given date based on ONI data.
+**Returns**: tibble. The input table with the `Meteorological_Season` and `ENSO_Phase` columns appended.
 
-- **Parameters**:
-  - `date`: character or Date. Date to classify.
-  - `oni_data`: data.frame. NOAA ONI data in wide format (Year + trimester columns).
-- **Returns**: character. One of Niño, Niña, or Neutral.
+**Errors**: the named date column does not exist.
 
-### `lookup_season_column(month)`
-
-Maps a numeric month to a trimester abbreviation used in ONI data.
-
-- **Parameters**:
-  - `month`: numeric. Month of the year (1–12).
-- **Returns**: character. Trimester abbreviation (DJF, JFM, FMA, MAM, AMJ, MJJ, JJA, JAS, ASO, SON, OND, NDJ).
-
-### `transform_roni_data_to_longer(roni_data)`
-
-Reshapes wide-format ONI data into long format.
-
-- **Parameters**:
-  - `roni_data`: data.frame. ONI data with a `Year` column and trimester value columns.
-- **Returns**: data.frame. Long-format data with columns `Year`, `months` (trimester), and `values` (ONI value).
-
-### `lookup_nine_oni_values(oni_data, year, trimester)`
-
-Extracts nine consecutive ONI values centered on a given year and trimester.
-
-- **Parameters**:
-  - `oni_data`: data.frame. Transformed ONI data in long format (Year, months, values).
-  - `year`: numeric. Target year.
-  - `trimester`: character. Target trimester abbreviation.
-- **Returns**: numeric. Vector of nine ONI values (four before, the target, four after).
-
-### `classify_enso_phase(oni_values)`
-
-Classifies ENSO phase from nine ONI values using a consecutive-threshold rule.
-
-- **Parameters**:
-  - `oni_values`: numeric. Vector of nine ONI values.
-- **Returns**: character. Niña if five or more consecutive values are ≤ -0.5; Niño if five or more consecutive values are ≥ 0.5; Neutral otherwise.
-
-### `has_consecutive_threshold_values(runs)`
-
-Checks whether a run-length encoding contains a run of five or more true values.
-
-- **Parameters**:
-  - `runs`: rle object. Run-length encoding of a logical condition.
-- **Returns**: logical. TRUE if any true run has length ≥ 5.
+**Notes**:
+- Every other column of the input comes back untouched.

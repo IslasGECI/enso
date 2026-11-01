@@ -1,0 +1,13 @@
+#:schema https://raw.githubusercontent.com/tskovlund/qed/main/docs/spec.schema.json
+
+name = "meteorological_season"
+
+[[criteria]]
+description = """
+A date is labelled by its meteorological season.
+The dates 2026-01-01 and 2026-02-01 are Winter, 2026-04-01 is Spring, 2026-07-01 and 2026-09-01 are Summer, and 2026-10-01 is Fall.
+"""
+
+[criteria.verify]
+type = "command"
+run = "Rscript -e \"testthat::test_file('tests/testthat/test_acceptance_meteorological_season.R', stop_on_failure = TRUE)\""

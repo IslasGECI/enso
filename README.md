@@ -8,21 +8,21 @@
 ![commits](https://img.shields.io/github/commit-activity/y/IslasGECI/enso)
 ![R-version](https://img.shields.io/github/r-package/v/IslasGECI/enso)
 
-Classify dates by season and El Niño-Southern Oscillation (ENSO) phase.
+Label dates by meteorological season and by El Niño-Southern Oscillation (ENSO) phase.
 
 ## How it works
 
-Provide a list of dates and a NOAA ONI dataset. The package returns each date with its season and ENSO phase (El Niño, La Niña, or Neutral).
+Give the package a date, and it tells you its season. Give it a date and a NOAA ONI table, and it also tells you the ENSO phase: El Niño, La Niña, or Neutral. Give it a whole table of dates, and it adds both labels as two new columns.
 
 | Feature | Status |
 | :--- | :--- |
-| Classify dates by season (Winter, Spring, Summer, Fall) | Ready |
-| Classify dates by ENSO phase (Niño, Niña, Neutral) | Ready |
-| CLI option definitions for automation scripts | Ready |
+| Label one date by season (Winter, Spring, Summer, Fall) | Ready |
+| Label one date by ENSO phase (Niño, Niña, Neutral) | Ready |
+| Add both labels to a table of dates | Ready |
 
 ## Before you start
 
-You need an ONI dataset from NOAA in wide format with a `Year` column and trimester columns (DJF, JFM, FMA, MAM, AMJ, MJJ, JJA, JAS, ASO, SON, OND, NDJ).
+To classify ENSO phases you need an ONI dataset from NOAA in wide format: a `Year` column and twelve trimester columns (DJF, JFM, FMA, MAM, AMJ, MJJ, JJA, JAS, ASO, SON, OND, NDJ).
 
 ## Run the project
 
@@ -50,15 +50,24 @@ remotes::install_github("IslasGECI/enso")
 
 ## Core concept
 
-If you pass a data frame with a `Date` column and ONI data to `classify_by_season_and_enso_phase()`, you get back the same data frame with two new columns:
+Three functions make up the package:
 
-- **Season** — Winter, Spring, Summer, or Fall, determined from the date.
-- **ENSO_Phase** — Niño, Niña, or Neutral, determined from the ONI values.
+```r
+library(enso)
 
-The ENSO phase is classified using a five-consecutive-month threshold: five or more months with ONI ≥ 0.5 indicates El Niño; five or more months with ONI ≤ -0.5 indicates La Niña.
+compute_meteorological_season("2026-01-01")
+#> [1] "Winter"
 
-## Coming soon
+compute_enso_phase("2023-08", oni_data)
+#> [1] "Niño"
 
-- Integration with `gecioptparse` for command-line argument parsing.
-- Additional ONI data sources and formats.
-- Batch processing of multiple date lists.
+compute_meteorological_season_and_enso_phase(dates, "Date", oni_data)
+#> # A tibble: 3 × 3
+#>   Date    Meteorological_Season ENSO_Phase
+#>   <chr>   <chr>                 <chr>
+#> 1 2023-08 Summer                Niño
+#> 2 2025-01 Winter                Niña
+#> 3 2024-04 Spring                Neutral
+```
+
+The ENSO phase uses a five-consecutive-month threshold: five or more trimesters with ONI ≥ 0.5 indicate El Niño; five or more with ONI ≤ −0.5 indicate La Niña; anything else is Neutral.

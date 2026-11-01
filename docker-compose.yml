@@ -7,3 +7,13 @@ services:
     command: bash
     volumes:
       - $PWD:/workdir
+
+  develop:
+    profiles: ["develop"]
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: islasgeci/enso:develop
+    command: bash
+    volumes:
+      - $PWD:/workdir
