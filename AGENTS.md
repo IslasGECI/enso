@@ -54,7 +54,7 @@ The project uses a strict red/green/refactor cycle via `make`. Each phase applie
 - Remote dependencies: `IslasGECI/testtools` (installed via `remotes` in `DESCRIPTION`). `tidyverse` brings lubridate, dplyr, and tidyr.
 - qed is not an R package: `Dockerfile.dev` builds it from source with Lean, and the `develop` Compose profile keeps that image out of the normal build.
 - `Dockerfile.dev` starts FROM `islasgeci/enso:latest`, so `docker compose build` must run before the `develop` profile build.
-- `.Rbuildignore` and `.gitignore` are tracked; the build skips `specs/` and `.pipelines/`, so a new top-level path needs an entry there.
+- `.Rbuildignore` and `.gitignore` are tracked; the build skips `specs/`, `.pipelines/`, and the Dockerfiles, so a new top-level path needs an entry there.
 - `testthat::test_file()` exits 0 even when a test fails; the criteria pass `stop_on_failure = TRUE` for that reason.
 - `Rscript` has no `--expr` option; use `-e`.
 - `NAMESPACE` is **generated** by roxygen2 — never edit by hand. Regen with `devtools::document()` (part of `make setup`).
