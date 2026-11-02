@@ -1,3 +1,4 @@
 log.txt
 man/*
 NAMESPACE
+tests/coverage-report.html
