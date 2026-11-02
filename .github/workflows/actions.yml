@@ -6,26 +6,13 @@ jobs:
     steps:
     - name: Copia repositorio
       uses: actions/checkout@main
-    - name: Construye imagen
-      run: |
-        docker build --tag islasgeci/enso .
-        docker compose --profile develop build develop
+    - name: Descarga imágenes
+      run: docker compose --profile develop pull
     - name: Verifica el formato
-      run: docker run islasgeci/enso make check
+      run: docker compose --profile develop run --rm develop make check
     - name: Corre pruebas y evalúa cobertura
-      run: docker run islasgeci/enso make coverage
+      run: docker compose --profile develop run --rm develop make coverage
     - name: Corre mutation testing
-      run: docker run islasgeci/enso make mutants
+      run: docker compose --profile develop run --rm develop make mutants
     - name: Verify acceptance criteria
       run: bash .pipelines/verify.sh
-    - name: Docker log-in
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      run: echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-    - name: Push latest Docker image to Docker Hub
-      run: docker push islasgeci/enso:latest
-    - name: Push SHA tag to Docker Hub
-      run: |
-        docker tag islasgeci/enso:latest islasgeci/enso:${GITHUB_SHA:0:4}
-        docker push islasgeci/enso:${GITHUB_SHA:0:4}
