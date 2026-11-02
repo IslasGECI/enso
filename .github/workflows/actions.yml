@@ -6,6 +6,13 @@ jobs:
     steps:
     - name: Copia repositorio
       uses: actions/checkout@main
+    - name: Libera espacio en disco
+      uses: jlumbroso/free-disk-space@main
+      with:
+        tool-cache: false
+        large-packages: true
+        docker-images: true
+        swap-storage: true
     - name: Descarga imágenes
       run: docker compose --profile develop pull
     - name: Verifica el formato
