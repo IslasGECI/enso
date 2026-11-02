@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "ENSO classification package"
+type: software
+abstract: "R package that labels dates by meteorological season and by El Niño-Southern Oscillation (ENSO) phase, using NOAA ONI data."
+authors:
+  - family-names: Rojas Mayoral
+    given-names: Evaristo
+    affiliation: "Grupo de Ecología y Conservación de Islas, A.C."
+    orcid: "https://orcid.org/0000-0001-6812-9562"
+contact:
+  - name: "Ciencia de Datos"
+    email: "ciencia.datos@islas.org.mx"
+identifiers:
+  - type: url
+    value: "https://github.com/IslasGECI/enso"
+repository-code: "https://github.com/IslasGECI/enso"
+url: "https://github.com/IslasGECI/enso"
+license: "AGPL-3.0-or-later"
+version: "0.1.0"
+date-released: "2026-11-01"
+keywords:
+  - enso
+  - El Niño
+  - La Niña
+  - ONI
+  - climate
+  - season
+  - R
